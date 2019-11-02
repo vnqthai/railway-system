@@ -14,7 +14,12 @@ class LineStation
     @open_at = open_at
   end
 
-  def opened?(time)
-    open_at <= time
+  def open?(time)
+    time >= @open_at &&
+      !(@line.close_at_night_time? && TimeService.night_time?(time))
+  end
+
+  def code
+    "#{@line.code}#{number}"
   end
 end

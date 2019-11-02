@@ -18,7 +18,7 @@ class Station
   def line_numbers
     results = []
     @line_stations.values.each do |ls|
-      results << "#{ls.line.code}#{ls.number}"
+      results << ls.code
     end
     results.join '/'
   end
@@ -60,11 +60,11 @@ class Station
     result
   end
 
-  def opened?(time, line_code = nil)
+  def open?(time, line_code = nil)
     if line_code
-      line_stations[line_code].opened?(time)
+      line_stations[line_code].open?(time)
     else
-      line_stations.values.any? { |ls| ls.opened?(time) }
+      line_stations.values.any? { |ls| ls.open?(time) }
     end
   end
 

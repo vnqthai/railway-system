@@ -17,12 +17,16 @@ class Railway
     routes_finder = RoutesFinder.new(@network, @start_time)
 
     # Can call this statement many times with different source and destination station names
+    # parse input data only once
     @routes = routes_finder.find(@source, @destination)
+
+    output
 
     #TODO:
     # - Case: no route found
     #   Source station opened at start time, but destination station not opened at arrive time
     # - Read from input file a list of [source, destination], process and output. Only read data file once.
+    # - Test same source and destination station
     # - Remove all `pry` things (used for debugging)
   end
 
@@ -64,7 +68,7 @@ class Railway
 
     source_station = @network.find_station_by_name(@source)
     @errors[:stations] << "Source station does not exist: #{@source}" unless source_station
-    if source_station && !source_station.opened?(@start_time)
+    if source_station && !source_station.open?(@start_time)
       @errors[:stations] << "Source station is not opened at start time: #{@source}"
     end
 
@@ -73,5 +77,18 @@ class Railway
 
     puts @errors[:stations]
     @errors[:stations].empty?
+  end
+
+  def output
+    puts "Fasted route to travel from #{@source} to #{@destination}:"
+    puts
+    @routes[:time_travel].output_general
+    puts
+    puts 'Friendly view:'
+    puts
+    puts 'Table view:'
+    @routes[:time_travel].output_table
+    puts
+    puts 'Notes: times are in minutes'
   end
 end

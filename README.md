@@ -31,7 +31,7 @@ $ bin/railway -h
 1. Read input file to a graph data structure in memory
 1. Find the source & destination stations in the graph, from their names
 1. Find posible route(s) from source to destanation station. Use Depth First Search to check possible routes.
-1. Calculate characteristics of each route (time travel, number of stations, number of transfers)
+1. Calculate characteristics of each route (time travel, number of stations)
 
 Handle special cases:
 
@@ -56,9 +56,8 @@ Dynamic, customizable configaration:
   * Stations
   * Connections
 * Route
-  * Time
+  * Time to travel
   * Stations count
-  * Transfers count
 
 ## Test
 
@@ -79,6 +78,10 @@ $ rspec
 ## Troubleshooting
 
 If you see this error: `permission denied: bin/railsystem`, please run `chmod +x bin/railsystem` then try again.
+
+## Futher improvements
+
+* Wait for line to operate (if it is not operating in night hours), if waiting time is less than taking another route.
 
 ## Contribute
 

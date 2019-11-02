@@ -5,6 +5,8 @@
 #             Values are LineStation objects. See line_station.rb.
 #
 class Line
+  CLOSE_AT_NIGHT = %w[DT CG CE]
+
   attr_accessor :code, :stations
 
   def initialize(code)
@@ -15,5 +17,9 @@ class Line
   # Returns LineStation object
   def find_station_by_number(number)
     @stations[number]&.station
+  end
+
+  def close_at_night_time?
+    CLOSE_AT_NIGHT.include?(code)
   end
 end
