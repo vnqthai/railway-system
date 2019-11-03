@@ -14,7 +14,7 @@ class Line
     @stations = {}
   end
 
-  # Returns LineStation object
+  # Returns Station object
   def find_station_by_number(number)
     @stations[number]&.station
   end

@@ -22,7 +22,7 @@ class Network
     @stations[station_name]
   end
 
-  # Returns LineStation object
+  # Returns Station object
   def find_station_by_line_and_number(line, number)
     @lines[line]&.find_station_by_number(number)
   end

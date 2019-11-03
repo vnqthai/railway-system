@@ -1,5 +1,4 @@
-require 'pry'
-Dir['./**/*.rb'].each{ |f| require f }
+Dir['./lib/**/*.rb'].each{ |f| require f }
 
 class Railway
   DEFAULT_DATA_FILE = 'data/StationMap.csv'
@@ -28,6 +27,9 @@ class Railway
     # - Read from input file a list of [source, destination], process and output. Only read data file once.
     # - Test same source and destination station
     # - Remove all `pry` things (used for debugging)
+    # - Update README
+    # Optional:
+    # - More detail spec of DataParser
   end
 
   private

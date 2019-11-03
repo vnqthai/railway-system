@@ -32,7 +32,7 @@ class Station
   end
 
   # Add this station into its line
-  # Set its adjacent stations in this line
+  # Set adjacent stations of this station in this line
   def set_line(line_station)
     @line_stations[line_station.line.code] = line_station
 
