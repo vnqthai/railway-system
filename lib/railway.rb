@@ -24,8 +24,8 @@ class Railway
     #TODO:
     # - Case: no route found
     #   Source station opened at start time, but destination station not opened at arrive time
-    # - Read from input file a list of [source, destination], process and output. Only read data file once.
     # - Test same source and destination station
+    # - Read from input file a list of [source, destination], process and output. Only read data file once.
     # - Remove all `pry` things (used for debugging)
     # - Update README
     # Optional:

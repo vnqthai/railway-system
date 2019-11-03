@@ -10,7 +10,7 @@ class TimeService
     end
 
     # From 10pm (inclusive) to 6am (exclusive)
-    # on Mon-Sun
+    # on Mon-Sun (everyday)
     def night_time?(time)
       hour = time.hour
       hour >= 22 || hour < 6

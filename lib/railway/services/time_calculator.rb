@@ -1,14 +1,13 @@
 # Calculate time to travel, and tranfer in this rail system
 # Based on many conditions
 class TimeCalculator
-  # Initialize accepts a list of stations, and time to start calculating
+  # Initialize accepts a list of stations
   def initialize(stations)
     @stations = stations
   end
 
-  # Addition of time travel, and transfer (if any) for the last step,
+  # Check the last 3 stations and visit time to find transfer
   # in seconds
-  # - Check the last 3 stations and visit time to find transfer
   def time_at_step(step, time)
     return 0 if @stations.size <= 1 || step <= 0 # Not have enough station, skip
 
