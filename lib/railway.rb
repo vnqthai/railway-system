@@ -80,14 +80,14 @@ class Railway
   end
 
   def output
-    puts "Fasted route to travel from #{@source} to #{@destination}:"
+    route = @routes[:time_travel]
+    puts "Fastest route to travel from #{@source} to #{@destination}:"
     puts
-    @routes[:time_travel].output_general
+    route.output_general
     puts
-    puts 'Friendly view:'
+    route.output_guides
     puts
-    puts 'Table view:'
-    @routes[:time_travel].output_table
+    route.output_table
     puts
     puts 'Notes: times are in minutes'
   end
