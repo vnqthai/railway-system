@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe TimeCalculator do
-  let(:time) { Time.new(2001, 1, 1) }
+  let(:time) { Time.new(2001, 1, 1, 10, 0, 0) }
   let(:travel_time_ns) { 600 }
   let(:travel_time_ew) { 900 }
   let(:transfer_time) { 720 }

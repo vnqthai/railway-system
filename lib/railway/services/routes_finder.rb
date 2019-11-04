@@ -14,7 +14,8 @@ class RoutesFinder
   # Returns an array of Routes
   def find(source, destination)
     @source_station = @network.find_station_by_name(source)
-    @destination = destination
+    @destination_station = @network.find_station_by_name(destination)
+    return {} unless @source_station && @network.find_station_by_name(destination)
 
     prepare
     visit(@source_station)
@@ -73,7 +74,7 @@ class RoutesFinder
     end
 
     # Reach destination
-    if station.name == @destination
+    if station.name == @destination_station.name
       # Found a better time travel
       if time_travel < @bests[:time_travel]
         @bests[:time_travel] = time_travel

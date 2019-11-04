@@ -13,9 +13,17 @@ class Route
     @stations.size - 1
   end
 
+  def count_transfers
+    (0..(@stations.size - 1)).count { |idx| has_transfer(idx) }
+  end
+
+  def transfer_stations
+    transfer_indices.map { |idx| @stations[idx] }
+  end
+
   def output_general
-    format = "%-12s %-100s\n"
-    time_format = '%Y %B %d, %I:%M:%S%p'
+    format = "%-12s %-40s\n"
+    time_format = '%A, %Y %B %d, %I:%M:%S%p'
     time_all = @time_calculator.time_all(@start_time)
     time_all_in_minute = time_all / 60
     time_all_in_hour = time_all_in_minute / 60
@@ -32,10 +40,10 @@ class Route
   def output_guides
     prev_idx = 0
 
-    transfers.each do |transfer_idx|
+    transfer_indices.each do |transfer_idx|
       station_from = @stations[prev_idx]
       station_transfer = @stations[transfer_idx]
-      line_from = station_from.common_line_codes(station_transfer).join('/')
+      line_from = @stations[prev_idx + 1].common_line_codes(station_transfer).join('/')
       line_to = station_transfer.common_line_codes(@stations[transfer_idx + 1]).join('/')
 
       stops_count = transfer_idx - prev_idx
@@ -73,13 +81,11 @@ class Route
       )
       current_time += transfer_time
     end
+    puts
+    puts 'Notes: times are in minutes'
   end
 
   private
-
-  def count_transfers
-    (0..(@stations.size - 1)).count { |idx| has_transfer(idx) }
-  end
 
   def has_transfer(step)
     step > 0 &&
@@ -87,7 +93,7 @@ class Route
       @stations[step - 1].common_line_codes(@stations[step + 1]).empty?
   end
 
-  def transfers
+  def transfer_indices
     (0..(@stations.size - 1)).select { |idx| has_transfer(idx) }
   end
 

@@ -1,3 +1,4 @@
+require 'pry'
 Dir['./lib/**/*.rb'].each{ |f| require f }
 
 class Railway
@@ -21,13 +22,12 @@ class Railway
 
     output
 
-    #TODO:
-    # - Case: no route found
-    #   Source station opened at start time, but destination station not opened at arrive time
-    # - Test same source and destination station
+    # TODO:
     # - Read from input file a list of [source, destination], process and output. Only read data file once.
     # - Remove all `pry` things (used for debugging)
     # - Update README
+    #   + Add output of routes (many cases)
+    #   + Add output of commands
     # Optional:
     # - More detail spec of DataParser
   end
@@ -39,11 +39,15 @@ class Railway
   def parse_and_validate_options(options)
     @errors[:options] = []
 
-    @source = options[:source]
-    @errors[:options] << 'Source station is required.' if @source.to_s.strip.length == 0
+    @source = options[:source].to_s.strip
+    @errors[:options] << 'Source station is required.' if @source.length == 0
 
-    @destination = options[:destination]
-    @errors[:options] << 'Destination station is required.' if @destination.to_s.strip.length == 0
+    @destination = options[:destination].to_s.strip
+    @errors[:options] << 'Destination station is required.' if @destination.length == 0
+
+    if @source.length != 0 && @source == @destination
+      @errors[:options] << 'Source and destination stations must be different.'
+    end
 
     begin
       @start_time = Time.parse(options[:start_time])
@@ -83,6 +87,14 @@ class Railway
 
   def output
     route = @routes[:time_travel]
+    unless route
+      puts "There is no available route from #{@source} to #{@destination} starting at #{@start_time.strftime('%Y %B %d, %H:%M:%S')}"
+      puts "Reasons maybe:"
+      puts "- Source and destination stations are not connected."
+      puts "- Destination station is not opened at sufficient time?"
+      return
+    end
+
     puts "Fastest route to travel from #{@source} to #{@destination}:"
     puts
     route.output_general
@@ -90,7 +102,5 @@ class Railway
     route.output_guides
     puts
     route.output_table
-    puts
-    puts 'Notes: times are in minutes'
   end
 end

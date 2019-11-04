@@ -3,7 +3,7 @@ require 'spec_helper'
 describe DataParser do
   describe '#parse' do
     before(:all) do
-      @lines, @stations = DataParser.new(TEST_DATA_FILE).parse
+      @lines, @stations = DataParser.new(TEST_DATA_FULL).parse
     end
 
     it 'parses lines' do
