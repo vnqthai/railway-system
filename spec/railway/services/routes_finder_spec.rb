@@ -99,7 +99,7 @@ describe RoutesFinder do
         # After 10PM, DT line does not operate
         let(:start_time) { Time.new(2100, 1, 1, 23, 0, 0) }
 
-        it 'chooses the next fastest route which does not use the closed-line to transfer' do
+        it 'chooses the next fastest route which does not use the closed line to transfer' do
           routes = routes_finder.find('Punggol', 'Bugis')
           expect(routes).to_not be_empty
 
@@ -110,11 +110,11 @@ describe RoutesFinder do
         end
       end
 
-      context 'fastest route contains in-construction stations' do
+      context 'fastest route contains not-finish-construction stations' do
         # Before 2013, stations on DT line were not opened
         let(:start_time) { Time.new(2012, 1, 1, 10, 0, 0) }
 
-        it 'chooses the next fastest route which does not use the in-construction stations' do
+        it 'chooses the next fastest route which does not use the not-finish-construction stations' do
           routes = routes_finder.find('Farrer Park', 'Novena')
           expect(routes).to_not be_empty
 
@@ -125,7 +125,7 @@ describe RoutesFinder do
         end
       end
 
-      context 'source and destination is on the same line, but taking transfers is faster' do
+      context 'source and destination stations are on the same line, but taking transfers is faster' do
         context 'take one transfer' do
           it 'chooses the transfer route instead' do
             routes = routes_finder.find('Jurong East', 'Marina Bay')
@@ -134,7 +134,7 @@ describe RoutesFinder do
             fastest_route = routes[:time_travel]
             expect(fastest_route.count_stations).to eq(11)
             expect(fastest_route.count_transfers).to eq(1)
-            expect(fastest_route.transfer_stations.map(&:name)).to contain_exactly('Raffles Place')
+            expect(fastest_route.transfer_stations.map(&:name)).to contain_exactly('Outram Park')
           end
         end
 

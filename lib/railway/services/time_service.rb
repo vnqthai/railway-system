@@ -56,7 +56,7 @@ class TimeService
 
     def time_travel_non_peak(line_code)
       case line_code
-      when 'DT', 'TE '
+      when 'DT', 'TE'
         8
       else
         10

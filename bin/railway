@@ -21,7 +21,7 @@ OptionParser.new do |opts|
     options[:start_time] = time
   end
 
-  opts.on('-f', '--data-file file', 'Railway network data file path (CSV format)') do |file|
+  opts.on('-f', '--data-file file', 'Railway network data file path in CSV format, optional, default "data/StationMap.csv"') do |file|
     options[:data_file] = file
   end
 

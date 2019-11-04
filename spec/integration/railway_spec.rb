@@ -250,7 +250,7 @@ describe Railway do
         end
       end
 
-      context 'need more than 1 step, but travel in the same line' do
+      context 'need more than 1 step, but travel on the same line' do
         let(:source) { 'Punggol' }
         let(:destination) { 'Chinatown' }
 
@@ -294,7 +294,7 @@ describe Railway do
         let(:destination) { 'Bugis' }
         let(:start_time) { '2100-01-01T23:00:00' }
 
-        it 'shows the next fastest route which does not use the closed-line to transfer' do
+        it 'shows the next fastest route which does not use the closed line to transfer' do
           expected << 'Time travel: 2 hours 30 minutes'
           expected << "On line NE, travel from #{source} to Dhoby Ghaut, 11 stops"
           expected << "Transfer from line NE to line NS at Dhoby Ghaut"
@@ -305,12 +305,12 @@ describe Railway do
         end
       end
 
-      context 'fastest route contains in-construction stations' do
+      context 'fastest route contains not-finish-construction stations' do
         let(:source) { 'Farrer Park' }
         let(:destination) { 'Novena' }
         let(:start_time) { '2012-01-01T10:00:00' }
 
-        it 'shows the next fastest route which does not use the in-construction stations' do
+        it 'shows the next fastest route which does not use the not-finish-construction stations' do
           expected << 'Time travel: 1 hour 10 minutes'
           expected << "On line NE, travel from #{source} to Dhoby Ghaut, 2 stops"
           expected << "Transfer from line NE to line NS at Dhoby Ghaut"
@@ -319,16 +319,16 @@ describe Railway do
         end
       end
 
-      context 'source and destination is on the same line, but taking transfers is faster' do
+      context 'source and destination stations are on the same line, but taking transfers is faster' do
         context 'take one transfer' do
           let(:source) { 'Jurong East' }
           let(:destination) { 'Marina Bay' }
 
           it 'shows the transfer route instead' do
-            expected << 'Time travel: 2 hours 0 minute'
-            expected << "On line EW, travel from #{source} to Raffles Place, 10 stops"
-            expected << "Transfer from line EW to line NS at Raffles Place"
-            expected << "On line NS, travel from Raffles Place to #{destination}, 1 stop"
+            expected << 'Time travel: 1 hour 54 minutes'
+            expected << "On line EW, travel from #{source} to Outram Park, 8 stops"
+            expected << "Transfer from line EW to line TE at Outram Park"
+            expected << "On line TE, travel from Outram Park to #{destination}, 3 stops"
             expect { subject }.to output(expected_regex).to_stdout
           end
 

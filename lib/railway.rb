@@ -1,4 +1,3 @@
-require 'pry'
 Dir['./lib/**/*.rb'].each{ |f| require f }
 
 class Railway
@@ -21,15 +20,6 @@ class Railway
     @routes = routes_finder.find(@source, @destination)
 
     output
-
-    # TODO:
-    # - Read from input file a list of [source, destination], process and output. Only read data file once.
-    # - Remove all `pry` things (used for debugging)
-    # - Update README
-    #   + Add output of routes (many cases)
-    #   + Add output of commands
-    # Optional:
-    # - More detail spec of DataParser
   end
 
   private
