@@ -59,7 +59,14 @@ Dynamic, customizable configaration:
   * Time to travel
   * Stations count
 
+## Example Outputs
+
+Here are example outputs of some cases:
+
+
 ## Test
+
+If you update the code or add functionalities, can use existing test to make sure your changes do not break any existing thing.
 
 Use `rspec`.
 
@@ -73,6 +80,10 @@ $ gem install rspe
 
 ```
 $ rspec
+..............................................................................................
+
+Finished in 0.75249 seconds (files took 0.443 seconds to load)
+94 examples, 0 failures
 ```
 
 ## Troubleshooting

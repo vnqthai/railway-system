@@ -27,10 +27,11 @@ class Route
     time_all = @time_calculator.time_all(@start_time)
     time_all_in_minute = time_all / 60
     time_all_in_hour = time_all_in_minute / 60
-    minute_text = "minute#{plural_text(time_all_in_minute)}"
+    time_all_minute_remain = time_all_in_minute % 60
+    minute_text = "minute#{plural_text(time_all_minute_remain)}"
     hour_text = "hour#{plural_text(time_all_in_hour)}"
 
-    printf(format, 'Time travel:', "#{time_all_in_hour} #{hour_text} #{time_all_in_minute % 60} #{minute_text}")
+    printf(format, 'Time travel:', "#{time_all_in_hour} #{hour_text} #{time_all_minute_remain} #{minute_text}")
     printf(format, 'Start:', @start_time.strftime(time_format))
     printf(format, 'Arrive:', (@start_time + time_all).strftime(time_format))
     printf(format, 'Stations:', count_stations)
@@ -43,7 +44,10 @@ class Route
     transfer_indices.each do |transfer_idx|
       station_from = @stations[prev_idx]
       station_transfer = @stations[transfer_idx]
-      line_from = @stations[prev_idx + 1].common_line_codes(station_transfer).join('/')
+
+      line_from_codes = station_from.common_line_codes(station_transfer)
+      line_from_codes = @stations[prev_idx + 1].common_line_codes(station_transfer) if line_from_codes.size > 1
+      line_from = line_from_codes.join('/')
       line_to = station_transfer.common_line_codes(@stations[transfer_idx + 1]).join('/')
 
       stops_count = transfer_idx - prev_idx

@@ -127,7 +127,7 @@ describe RoutesFinder do
 
       context 'source and destination is on the same line, but taking transfers is faster' do
         context 'take one transfer' do
-          it 'chooses the transfer route' do
+          it 'chooses the transfer route instead' do
             routes = routes_finder.find('Jurong East', 'Marina Bay')
             expect(routes).to_not be_empty
 
@@ -139,7 +139,7 @@ describe RoutesFinder do
         end
 
         context 'take more than one transfer' do
-          it 'chooses the multiple-transfer route' do
+          it 'chooses the multiple-transfer route instead' do
             routes = routes_finder.find('Bukit Panjang', 'Expo')
             expect(routes).to_not be_empty
 
